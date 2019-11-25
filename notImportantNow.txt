@@ -1,0 +1,14 @@
+Time:
+11h00/Users/mmosfa/Downloads/testSets_v1 2/TestSet1/drones11h00_2019y11m5.txt
+Day:
+5-11-2019
+Company:
+iXicoZe
+Drones:
+Jupiter, alvalade, 20, 2000, 500, 20, 2019-11-05, 10:15
+Terra, ameixoeira, 15, 1500, 400, 20, 2019-11-05, 10:20
+V125, ameixoeira, 20, 2000, 350, 20, 2019-11-05, 10:20
+Saturno, lumiar, 10, 1000, 600, 20, 2019-11-05, 10:30
+Neptuno, lumiar, 15, 1500, 600, 15, 2019-11-05, 10:30
+Mercurio, alvalade, 25, 2500, 200, 20, 2019-11-05, 10:40
+Marte, campogrande, 10, 1500, 100, 10, 2019-11-05, 10:50
