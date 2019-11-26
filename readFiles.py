@@ -4,32 +4,16 @@
 # número nome
 
 
-
-
-def readDronesFile(fileName):
+def readHeader(fileName):
+    #Status - Working
     """
-    Converts a given file listing drones into a collection.
+    Reads the header of the text file and return as a tuple
 
-    Requires: fileName is str, the name of a .txt file listing drones,
-    following the format specified in the project sheet.
-    Ensures: list whose first element is ... <to complete>
+    requires: a text file, either drone input file or parcels input
+    ensures: a tuple with the day, time, company and scope present in the header
     """
-    outputList = []
-
-    outputList.append(readHeader(fileName))
 
     fileIn = open(fileName, 'r')
-
-    # ... <to complete>
-
-    return outputList
-
-
-
-def readHeader(fileName):
-
-    # ... <to complete>
-
     fileIn.readline()
     time = fileIn.readline().strip().replace("\n", "")
     fileIn.readline()
@@ -38,8 +22,57 @@ def readHeader(fileName):
     company = fileIn.readline().strip().replace("\n", "")
     fileIn.readline()
     scope = fileIn.readline().strip().replace("\n", "")
+    fileIn.close()
 
     return (day, time, company, scope)
+
+
+
+def readDronesFile(fileName):
+    #status - In Process
+    """
+    Converts a given file listing drones into a collection.
+
+    Requires: fileName is str, the name of a .txt file listing drones,
+    following the format specified in the project sheet.
+    Ensures: list whose first element is ... <to complete>
+    """
+
+
+
+    outputListD = []
+    fileIn1 = open(fileName, 'r')
+    counter = 0
+    for line in fileIn1:
+        if counter > 5:
+            outputListD.append(fileIn1.readline().split())
+        counter += 1
+
+    fileIn1.close()
+
+    return outputListD[:-1]
+
+
+
+def readParcelsFile(fileName):
+    #Status - Not Working
+    """
+       Converts a given file listing parcels into a collection.
+
+       Requires: fileName is str, the name of a .txt file listing the parcles,
+       following the format specified in the project sheet.
+       Ensures: list whose first element is ... <to complete>
+       """
+    outputListP = []
+    fileIn2 = open(fileName, 'r')
+    counter = 0
+    for line in fileIn2:
+        if counter > 5:
+            outputListP.append([fileIn2.readline().split()])
+        counter += 1
+    fileIn2.close()
+
+    return outputListP[:-1]
 
 
 

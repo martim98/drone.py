@@ -1,5 +1,5 @@
 Time:
-11h00/Users/mmosfa/Downloads/testSets_v1 2/TestSet1/drones11h00_2019y11m5.txt
+11h00
 Day:
 5-11-2019
 Company:
