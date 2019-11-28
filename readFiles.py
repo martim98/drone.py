@@ -29,7 +29,7 @@ def readHeader(fileName):
 
 
 def readDronesFile(fileName):
-    #status - In Process
+    #status - Working
     """
     Converts a given file listing drones into a collection.
 
@@ -45,7 +45,7 @@ def readDronesFile(fileName):
     counter = 0
     for line in fileIn1:
         if counter > 5:
-            outputListD.append(fileIn1.readline().split())
+            outputListD.append(fileIn1.readline().split(','))
         counter += 1
 
     fileIn1.close()
@@ -55,7 +55,7 @@ def readDronesFile(fileName):
 
 
 def readParcelsFile(fileName):
-    #Status - Not Working
+    #Status - Working
     """
        Converts a given file listing parcels into a collection.
 
@@ -68,7 +68,7 @@ def readParcelsFile(fileName):
     counter = 0
     for line in fileIn2:
         if counter > 5:
-            outputListP.append([fileIn2.readline().split()])
+            outputListP.append(fileIn2.readline().split(','))
         counter += 1
     fileIn2.close()
 
