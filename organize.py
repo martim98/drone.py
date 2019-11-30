@@ -1,4 +1,5 @@
 import readFiles as rf
+import constants as ct
 from copy import deepcopy
 
 
@@ -16,21 +17,53 @@ def organizeDrones(fileName):
         dronesOgranized = []
         for i in range(0, 2):
             dronesOgranized.append(a[b][i])
-        for i in range(-1, -7, -1):
+        for i in range(6, 8):
             dronesOgranized.append(a[b][i])
-        dronesOgranized.remove(dronesOgranized[2]) #remove hour
-        dronesOgranized.remove(dronesOgranized[2]) #remove date
-        dronesOgranized.insert(2, a[b][6])
-        dronesOgranized.insert(3, a[b][7])
+        dronesOgranized.append(a[b][3])
+        dronesOgranized.append(a[b][2])
+        dronesOgranized.append(a[b][5])
+        dronesOgranized.append(a[b][4])
         orgOutListD.append(dronesOgranized)
 
+
+    ct.convertStrDrones(orgOutListD)
     return orgOutListD
 
+def organizeParcels(fileName):
+    a = rf.readParcelsFile(fileName)
+    ct.convertStrParcles(a)
+    return a
+
 def checkInformation(fileName1, fileName2):
-    list1 = rf.readParcelsFile(fileName1)
+    list1 = organizeParcels(fileName1)
     list2 = organizeDrones(fileName2)
-    print(list1, list2)
-    print(len(list1[0]), len(list2[0]))
+    print(list1)
+    print(list2)
+    listF =[]
+    writeTB = []
+    for a in range(len(list1)):
+        for b in range(len(list2)):
+            listBool = []
+            for i in range(1, 3):
+                listBool.append(list1[a][i] == list2[b][i])
+            for i in range(4, 6):
+                listBool.append(list2[b][i] >= list1[a][i])
+
+            listBool.append(list2[b][6]*1000 > list1[a][4]) # distance
+            listBool.append(list2[b][3] <= list1[a][3]) # time
+            listF.append(listBool)
+            if False not in listBool:
+                writeTB.append([list1[a][2], list1[a][3], list1[a][0], list2[b][0]])
+
+
+        print(listF)
+        print(writeTB)
+        return writeTB
+
+
+
+
+
 
 
     """ Function that matches drones with parcels
@@ -54,6 +87,6 @@ def updateDrones():
 
 
 
-print(organizeDrones('drones11h30_2019y11m5.txt'))
+
 
 

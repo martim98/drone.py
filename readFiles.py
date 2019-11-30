@@ -45,12 +45,12 @@ def readDronesFile(fileName):
     counter = 0
     for line in fileIn1:
         if counter > 5:
-            outputListD.append(fileIn1.readline().split(','))
+            outputListD.append(fileIn1.readline().strip().split(','))
         counter += 1
 
+    return outputListD[:-1]
     fileIn1.close()
 
-    return outputListD[:-1]
 
 
 
@@ -68,11 +68,11 @@ def readParcelsFile(fileName):
     counter = 0
     for line in fileIn2:
         if counter > 5:
-            outputListP.append(fileIn2.readline().split(','))
+            outputListP.append(fileIn2.readline().strip().split(','))
         counter += 1
     fileIn2.close()
-
     return outputListP[:-1]
+
 
 
 
