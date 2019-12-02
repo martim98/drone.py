@@ -60,11 +60,11 @@ def match(fileName1, fileName2):
                 writeTB.append([list1[a][2], list1[a][3], list1[a][0], list2[b][0]])
                 counter += 1
 
-        print('this is the parcel list:', '\n', list1)
-        print('this is drones list:', '\n', list2)
-        print('this is the list of booleans that validated the conditions:', '\n', listF)
-        print('this would be the output list to the files', '\n', writeTB)
 
+    print('this is the parcel list:', '\n', list1)
+    print('this is drones list:', '\n', list2)
+    print('this is the list of booleans that validated the conditions:', '\n', listF)
+    print('this would be the output list to the files', '\n', writeTB)
 
 
 match('parcels15h30_2019y11m4.txt', 'drones15h30_2019y11m4.txt')
