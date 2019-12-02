@@ -2,8 +2,6 @@ import readFiles as rf
 import constants as ct
 from copy import deepcopy
 
-
-
 def organizeDrones(fileName):
     """ Function that reorganizes list of lists of drones
     Requires: A list of lists with the drone information retrieved
@@ -24,23 +22,30 @@ def organizeDrones(fileName):
         dronesOgranized.append(a[b][5])
         dronesOgranized.append(a[b][4])
         orgOutListD.append(dronesOgranized)
-
-
-    ct.convertStrDrones(orgOutListD)
-    return orgOutListD
+    while [''] in dronesOgranized:
+        dronesOrganized.remove([''])
+    return ct.convertStrDrones(orgOutListD)
 
 def organizeParcels(fileName):
-    a = rf.readParcelsFile(fileName)
-    ct.convertStrParcles(a)
-    return a
+    """Function to organize and prepare list of lists of parcels
+    requires: the fileName of parcels
+    ensures: A list of list with values adpted for further functions
+    """
+    parcelsOrganized = rf.readParcelsFile(fileName)
+    while [''] in parcelsOrganized:
+        parcelsOrganized.remove([''])
+    return ct.convertStrParcles(parcelsOrganized)
 
-def checkInformation(fileName1, fileName2):
+def match(fileName1, fileName2):
+    """The core function, it matches drones with parcels
+    Requires: two fileNames of parcels and drones in this order
+    Ensures: A list of list of the drones matched with drones
+    """
     list1 = organizeParcels(fileName1)
     list2 = organizeDrones(fileName2)
-    print(list1)
-    print(list2)
     listF =[]
     writeTB = []
+    counter = 0
     for a in range(len(list1)):
         for b in range(len(list2)):
             listBool = []
@@ -48,30 +53,24 @@ def checkInformation(fileName1, fileName2):
                 listBool.append(list1[a][i] == list2[b][i])
             for i in range(4, 6):
                 listBool.append(list2[b][i] >= list1[a][i])
-
             listBool.append(list2[b][6]*1000 > list1[a][4]) # distance
             listBool.append(list2[b][3] <= list1[a][3]) # time
             listF.append(listBool)
             if False not in listBool:
                 writeTB.append([list1[a][2], list1[a][3], list1[a][0], list2[b][0]])
+                counter += 1
 
-
-        print(listF)
-        print(writeTB)
-        return writeTB
-
-
-
-
+        print('this is the parcel list:', '\n', list1)
+        print('this is drones list:', '\n', list2)
+        print('this is the list of booleans that validated the conditions:', '\n', listF)
+        print('this would be the output list to the files', '\n', writeTB)
 
 
 
-    """ Function that matches drones with parcels
-    Requires: Two lists of lists, one from drones, other from parcels
-    Ensures: A list of lists with the orders matched or canceled
-    """
+match('parcels15h30_2019y11m4.txt', 'drones15h30_2019y11m4.txt')
 
-checkInformation('parcels15h30_2019y11m4.txt', 'drones15h30_2019y11m4.txt')
+
+
 
 
 def updateDrones():

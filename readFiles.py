@@ -12,7 +12,6 @@ def readHeader(fileName):
     requires: a text file, either drone input file or parcels input
     ensures: a tuple with the day, time, company and scope present in the header
     """
-
     fileIn = open(fileName, 'r')
     fileIn.readline()
     time = fileIn.readline().strip().replace("\n", "")
@@ -37,19 +36,12 @@ def readDronesFile(fileName):
     following the format specified in the project sheet.
     Ensures: list whose first element is ... <to complete>
     """
-
-
-
     outputListD = []
     fileIn1 = open(fileName, 'r')
-    counter = 0
-    for line in fileIn1:
-        if counter > 5:
-            outputListD.append(fileIn1.readline().strip().split(','))
-        counter += 1
-
-    return outputListD[:-1]
-    fileIn1.close()
+    content = fileIn1.readlines()
+    for line in content:
+        outputListD.append(line.replace('\n', '').split(','))
+    return outputListD[7:]
 
 
 
@@ -65,13 +57,14 @@ def readParcelsFile(fileName):
        """
     outputListP = []
     fileIn2 = open(fileName, 'r')
-    counter = 0
-    for line in fileIn2:
-        if counter > 5:
-            outputListP.append(fileIn2.readline().strip().split(','))
-        counter += 1
+    content = fileIn2.readlines()
+    for line in content:
+        outputListP.append(line.replace('\n', '').split(','))
     fileIn2.close()
-    return outputListP[:-1]
+    return outputListP[7:]
+
+
+
 
 
 
