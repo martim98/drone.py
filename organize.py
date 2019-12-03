@@ -10,6 +10,8 @@ def organizeDrones(fileName):
     of the parcels information
     """
     a = rf.readDronesFile(fileName)
+    while [''] in a: # remove [''] that were causing errors
+        a.remove([''])
     orgOutListD = []
     for b in range(len(a)):
         dronesOgranized = []
@@ -22,8 +24,8 @@ def organizeDrones(fileName):
         dronesOgranized.append(a[b][5])
         dronesOgranized.append(a[b][4])
         orgOutListD.append(dronesOgranized)
-    while [''] in dronesOgranized:
-        dronesOrganized.remove([''])
+    while [''] in orgOutListD: # this code is just to be sure that there are no [''] in the output list
+        orgOutListD.remove([''])
     return ct.convertStrDrones(orgOutListD)
 
 def organizeParcels(fileName):
