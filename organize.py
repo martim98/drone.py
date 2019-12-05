@@ -1,5 +1,5 @@
 import readFiles as rf
-import constants as ct
+import operations as op
 from copy import deepcopy
 
 def organizeDrones(fileName):
@@ -26,7 +26,7 @@ def organizeDrones(fileName):
         orgOutListD.append(dronesOgranized)
     while [''] in orgOutListD: # this code is just to be sure that there are no [''] in the output list
         orgOutListD.remove([''])
-    return ct.convertStrDrones(orgOutListD)
+    return op.convertStrDrones(orgOutListD)
 
 def organizeParcels(fileName):
     """Function to organize and prepare list of lists of parcels
@@ -36,7 +36,7 @@ def organizeParcels(fileName):
     parcelsOrganized = rf.readParcelsFile(fileName)
     while [''] in parcelsOrganized:
         parcelsOrganized.remove([''])
-    return ct.convertStrParcles(parcelsOrganized)
+    return op.convertStrParcles(parcelsOrganized)
 
 def match(fileName1, fileName2):
     """The core function, it matches drones with parcels
@@ -59,19 +59,15 @@ def match(fileName1, fileName2):
             listBool.append(list2[b][3] <= list1[a][3]) # time
             listF.append(listBool)
             if False not in listBool:
-                writeTB.append([list1[a][2], list1[a][3], list1[a][0], list2[b][0]])
+                writeTB.append([list1[a][2].lstrip(), op.convertTimeToStr(list1[a][3]), list1[a][0], list2[b][0]])
                 counter += 1
 
 
-    print('this is the parcel list:', '\n', list1)
-    print('this is drones list:', '\n', list2)
-    print('this is the list of booleans that validated the conditions:', '\n', listF)
+    #print('this is the parcel list:', '\n', list1)
+    #print('this is drones list:', '\n', list2)
+    #print('this is the list of booleans that validated the conditions:', '\n', listF)
     print('this would be the output list to the files', '\n', writeTB)
-
-
-match('parcels15h30_2019y11m4.txt', 'drones15h30_2019y11m4.txt')
-
-
+    return writeTB
 
 
 
@@ -87,7 +83,5 @@ def updateDrones():
 
 
 
-
-
-
+match('parcels15h30_2019y11m4.txt', 'drones15h30_2019y11m4.txt')
 

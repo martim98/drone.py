@@ -12,19 +12,12 @@ def readHeader(fileName):
     requires: a text file, either drone input file or parcels input
     ensures: a tuple with the day, time, company and scope present in the header
     """
-    fileIn = open(fileName, 'r')
-    fileIn.readline()
-    time = fileIn.readline().strip().replace("\n", "")
-    fileIn.readline()
-    day = fileIn.readline().strip().replace("\n", "")
-    fileIn.readline()
-    company = fileIn.readline().strip().replace("\n", "")
-    fileIn.readline()
-    scope = fileIn.readline().strip().replace("\n", "")
-    fileIn.close()
-
-    return (day, time, company, scope)
-
+    outputListH = []
+    fileInH = open(fileName, 'r')
+    content = fileInH.readlines()
+    for line in content:
+        outputListH.append(line.replace('\n', ''))
+    return tuple(outputListH[:5])
 
 
 def readDronesFile(fileName):
