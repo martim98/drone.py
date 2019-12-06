@@ -43,40 +43,51 @@ def match(fileName1, fileName2):
     Requires: two fileNames of parcels and drones in this order
     Ensures: A list of list of the drones matched with drones
     """
-    list1 = organizeParcels(fileName1)
-    list2 = organizeDrones(fileName2)
+    listParcels = organizeParcels(fileName1)
+    listDrones = organizeDrones(fileName2)
     listF =[]
     writeTB = []
-    counter = 0
-    for a in range(len(list1)):
-        for b in range(len(list2)):
+    writeFinal = []
+    for a in range(len(listParcels)):
+        bole = True
+        b = 0
+        while bole:
             listBool = []
             for i in range(1, 3):
-                listBool.append(list1[a][i] == list2[b][i])
+                listBool.append(listParcels[a][i] == listDrones[b][i])
             for i in range(4, 6):
-                listBool.append(list2[b][i] >= list1[a][i])
-            listBool.append(list2[b][6]*1000 > list1[a][4]) # distance
-            listBool.append(list2[b][3] <= list1[a][3]) # time
+                listBool.append(listDrones[b][i] >= listParcels[a][i])
+            listBool.append(listDrones[b][6]*1000 > listParcels[a][4]) # distance
+            listBool.append(listDrones[b][3] <= listParcels[a][3]) # time
             listF.append(listBool)
             if False not in listBool:
-                writeTB.append([list1[a][2].lstrip(), op.convertTimeToStr(list1[a][3]), list1[a][0], list2[b][0]])
-                counter += 1
+                writeTB.append([listParcels[a][2].lstrip(), op.convertTimeToStr(listParcels[a][3]), listParcels[a][0], listDrones[b][0]])
+                updateDrones(listDrones)
+                bole = False
+            b += 1
+            if b == len(listDrones) - 1 and False in listBool:
+                writeFinal.append([listParcels[a][2].lstrip(), op.convertTimeToStr(listParcels[a][3]), listParcels[a][0], listDrones[b][0], 'cancelled'])
+                bole = False
+            elif b == len(listDrones) - 1:
+                bole = False
 
 
-    #print('this is the parcel list:', '\n', list1)
-    #print('this is drones list:', '\n', list2)
-    #print('this is the list of booleans that validated the conditions:', '\n', listF)
-    print('this would be the output list to the files', '\n', writeTB)
-    return writeTB
 
 
 
-def updateDrones():
+
+    return writeFinal + writeTB
+
+
+
+def updateDrones(list):
     """ Function that updates list of lists of drones
     Requires: A list with technical information retrieved from matching
     parcels and drones
     Ensures: an updated list of lists of each drone if needed
     """
+    return list
+
 
 
 
