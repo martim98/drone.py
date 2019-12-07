@@ -1,5 +1,6 @@
 import readFiles as rf
 import operations as op
+import timeD
 from copy import deepcopy
 
 
@@ -46,35 +47,63 @@ def match(fileName1, fileName2):
     """
     listParcels = organizeParcels(fileName1)
     listDrones = organizeDrones(fileName2)
-    print(listDrones)
-    print(listParcels)
     listF =[]
     writeTB = []
     writeFinal = []
-    for a in range(len(listParcels)):
-        bole = True
+    bole1 = True
+    a = 0 #this should be 0
+    counter = 0
+    while bole1:
+        bole2 = True
         b = 0
-        while bole:
+        counter1 = counter
+        while bole2:
             listBool = []
             for i in range(1, 3):
                 listBool.append(listParcels[a][i] == listDrones[b][i])
             for i in range(4, 6):
                 listBool.append(listDrones[b][i] >= listParcels[a][i])
-            listBool.append(listDrones[b][6]*1000 > listParcels[a][4]) # distance
-            listBool.append(listDrones[b][3] <= listParcels[a][3]) # time
+            listBool.append(listDrones[b][6]*1000 > listParcels[a][4]) #distance
             listF.append(listBool)
+
+            # checking the booleans and matching
             if False not in listBool:
-                writeTB.append([listParcels[a][2].lstrip(), op.convertTimeToStr(listParcels[a][3]).lstrip(), listParcels[a][0].lstrip(), listDrones[b][0].lstrip()])
-                updateDrones(listDrones, listParcels, a, b)
-                bole = False
+                if timeD.giveDateTime(listDrones[b][2], listDrones[b][3]) <= timeD.giveDateTime(listParcels[a][2], listParcels[a][3]):
+                    writeTB.append([listParcels[a][2].lstrip(), listParcels[a][3].lstrip(),
+                                    listParcels[a][0].lstrip(), listDrones[b][0].lstrip()])
+                    listDrones[b][3] = listParcels[a][3].lstrip()
+                    updateDrones(listDrones, listParcels, a, b)
+
+                else:
+                    writeTB.append([listParcels[a][2].lstrip(), listDrones[b][3].lstrip(),
+                                    listParcels[a][0].lstrip(), listDrones[b][0].lstrip()])
+                    updateDrones(listDrones, listParcels, a, b)
+
+
+                counter += 1
+                bole2 = False
+
+            #end the loop if exceeds the list lenght and write cancel if no match was found
+
             b += 1
-            if b == len(listDrones) - 1 and False in listBool:
-                writeFinal.append([listParcels[a][2].lstrip(), op.convertTimeToStr(listParcels[a][3]).lstrip(), listParcels[a][0].lstrip(), 'cancelled'])
-                bole = False
-            elif b == len(listDrones) - 1:
-                bole = False
+            if b == len(listDrones) and False in listBool and counter == counter1:
+                writeFinal.append([listParcels[a][2].lstrip(), listParcels[a][3].lstrip(),
+                                   listParcels[a][0].lstrip(), 'cancelled'])
+                bole2 = False
+
+
+
+
+        a += 1
+        if a == len(listParcels):
+            bole1 = False
+        elif a == len(listParcels) and counter != counter1:
+            a = 0
+
 
     return {'timetable': writeFinal + writeTB, 'drones': listDrones}
+
+
 
 
 
@@ -86,9 +115,11 @@ def updateDrones(listDrones, listParcels, a, b):
     """
     listDrones[b][6] = listDrones[b][6] - ((listParcels[a][4]*2)/1000)
     listDrones[b][7] += (listParcels[a][4]*2)
+    listDrones[b][2:4] = timeD.addTime(listDrones[b][2:4], listParcels[a][6])
 
 
     return listDrones
+
 
 
 
