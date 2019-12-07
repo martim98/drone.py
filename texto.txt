@@ -1,10 +1,8 @@
 Problems:
 
--The readfiles parcels and drones, skip one line
-Probably because of the for loop, cannot figure why
 
--If there is more than one matching Have to correct the order of the drones
-by adding more characteristics to the list
 
--See if its necessary to iterate over the same parcel more than one time
+
+
+
 

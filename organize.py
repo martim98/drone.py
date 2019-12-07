@@ -1,6 +1,7 @@
 import readFiles as rf
 import operations as op
 import timeD
+import prepare as pr
 from copy import deepcopy
 
 
@@ -101,7 +102,7 @@ def match(fileName1, fileName2):
             a = 0
 
 
-    return {'timetable': writeFinal + writeTB, 'drones': listDrones}
+    return {'timetable': writeFinal + pr.sortingMaches(writeTB), 'drones': listDrones}
 
 
 
@@ -117,8 +118,8 @@ def updateDrones(listDrones, listParcels, a, b):
     listDrones[b][7] += (listParcels[a][4]*2)
     listDrones[b][2:4] = timeD.addTime(listDrones[b][2:4], listParcels[a][6])
 
-
-    return listDrones
+    #sorting drones
+    return listDrones.sort(key = lambda listDrones: (listDrones[3], listDrones[6]))
 
 
 

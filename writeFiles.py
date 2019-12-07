@@ -27,7 +27,7 @@ def writeTimeTable(parcelsFile, dronesFile):
     except IOError:
         print('ERROR: File not found')
 
-writeTimeTable('parcels19h30_2019y11m5.txt', 'drones19h30_2019y11m5.txt')
+
 
 
 def writeDronesUpdate(parcelsFile, dronesFile):
@@ -50,7 +50,9 @@ def writeDronesUpdate(parcelsFile, dronesFile):
         file.write('\n')
     file.close()
 
-writeDronesUpdate('parcels19h30_2019y11m5.txt', 'drones19h30_2019y11m5.txt')
+
+writeTimeTable('parcels11h00_2019y11m5.txt', 'drones11h00_2019y11m5.txt')
+writeDronesUpdate('parcels11h00_2019y11m5.txt', 'drones11h00_2019y11m5.txt')
 
 
 
