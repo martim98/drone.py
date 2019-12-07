@@ -4,7 +4,7 @@
 # número nome
 
 import sys
-
+import writeFiles as wf
 def allocate(fileNameDrones, fileNameParcels):
     """
     Assign given drones to given parcels.
@@ -16,7 +16,9 @@ def allocate(fileNameDrones, fileNameParcels):
     transportation of parcels and the updated listing of drones, following the format
     and naming convention indicated in the project sheet.
     """
-    #to be completed
+    wf.writeTimeTable(fileNameDrones, fileNameParcels)
+    wf.writeDronesUpdate(fileNameDrones, fileNameParcels)
+
 
 
 

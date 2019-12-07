@@ -17,7 +17,7 @@ def readHeader(fileName):
     content = fileInH.readlines()
     for line in content:
         outputListH.append(line.replace('\n', ''))
-    return tuple(outputListH[:5])
+    return tuple(outputListH[:6])
 
 
 def readDronesFile(fileName):
@@ -34,6 +34,8 @@ def readDronesFile(fileName):
     content = fileIn1.readlines()
     for line in content:
         outputListD.append(line.replace('\n', '').split(','))
+
+    print(outputListD[7:])
     return outputListD[7:]
 
 

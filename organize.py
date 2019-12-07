@@ -2,6 +2,7 @@ import readFiles as rf
 import operations as op
 from copy import deepcopy
 
+
 def organizeDrones(fileName):
     """ Function that reorganizes list of lists of drones
     Requires: A list of lists with the drone information retrieved
@@ -45,6 +46,8 @@ def match(fileName1, fileName2):
     """
     listParcels = organizeParcels(fileName1)
     listDrones = organizeDrones(fileName2)
+    print(listDrones)
+    print(listParcels)
     listF =[]
     writeTB = []
     writeFinal = []
@@ -61,38 +64,35 @@ def match(fileName1, fileName2):
             listBool.append(listDrones[b][3] <= listParcels[a][3]) # time
             listF.append(listBool)
             if False not in listBool:
-                writeTB.append([listParcels[a][2].lstrip(), op.convertTimeToStr(listParcels[a][3]), listParcels[a][0], listDrones[b][0]])
-                updateDrones(listDrones)
+                writeTB.append([listParcels[a][2].lstrip(), op.convertTimeToStr(listParcels[a][3]).lstrip(), listParcels[a][0].lstrip(), listDrones[b][0].lstrip()])
+                updateDrones(listDrones, listParcels, a, b)
                 bole = False
             b += 1
             if b == len(listDrones) - 1 and False in listBool:
-                writeFinal.append([listParcels[a][2].lstrip(), op.convertTimeToStr(listParcels[a][3]), listParcels[a][0], listDrones[b][0], 'cancelled'])
+                writeFinal.append([listParcels[a][2].lstrip(), op.convertTimeToStr(listParcels[a][3]).lstrip(), listParcels[a][0].lstrip(), 'cancelled'])
                 bole = False
             elif b == len(listDrones) - 1:
                 bole = False
 
+    return {'timetable': writeFinal + writeTB, 'drones': listDrones}
 
 
 
-
-
-    return writeFinal + writeTB
-
-
-
-def updateDrones(list):
+def updateDrones(listDrones, listParcels, a, b):
     """ Function that updates list of lists of drones
     Requires: A list with technical information retrieved from matching
     parcels and drones
     Ensures: an updated list of lists of each drone if needed
     """
-    return list
+    listDrones[b][6] = listDrones[b][6] - ((listParcels[a][4]*2)/1000)
+    listDrones[b][7] += (listParcels[a][4]*2)
+
+
+    return listDrones
 
 
 
 
 
 
-
-match('parcels15h30_2019y11m4.txt', 'drones15h30_2019y11m4.txt')
 
