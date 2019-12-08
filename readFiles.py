@@ -17,6 +17,7 @@ def readHeader(fileName):
     content = fileInH.readlines()
     for line in content:
         outputListH.append(line.replace('\n', ''))
+    fileInH.close()
     return tuple(outputListH[:6])
 
 
@@ -34,8 +35,7 @@ def readDronesFile(fileName):
     content = fileIn1.readlines()
     for line in content:
         outputListD.append(line.replace('\n', '').split(','))
-
-    print(outputListD[7:])
+    fileIn1.close()
     return outputListD[7:]
 
 
@@ -43,10 +43,9 @@ def readDronesFile(fileName):
 
 def readParcelsFile(fileName):
     #Status - Working
-    """
-       Converts a given file listing parcels into a collection.
+    """Converts a given file listing parcels into a collection.
 
-       Requires: fileName is str, the name of a .txt file listing the parcles,
+       Requires: fileName is str, the name of a .txt file listing the parcels,
        following the format specified in the project sheet.
        Ensures: list whose first element is ... <to complete>
        """

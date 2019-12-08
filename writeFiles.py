@@ -4,7 +4,8 @@ import organize as org
 
 
 def writeTimeTable(parcelsFile, dronesFile):
-    """ Function that writes time table
+    """
+    Writes time table
     Requires: two txt input files as specified
     Ensures: a output txt file with the timetable
     """
@@ -31,7 +32,9 @@ def writeTimeTable(parcelsFile, dronesFile):
 
 
 def writeDronesUpdate(parcelsFile, dronesFile):
-    """Function that writes drone update file
+    """
+    Writes drone update file
+
     Requires: the drone input file as specified
     Ensures: a output txt file with the drone list updated after matching with parcels
     """
@@ -51,8 +54,8 @@ def writeDronesUpdate(parcelsFile, dronesFile):
     file.close()
 
 
-writeTimeTable('parcels11h00_2019y11m5.txt', 'drones11h00_2019y11m5.txt')
-writeDronesUpdate('parcels11h00_2019y11m5.txt', 'drones11h00_2019y11m5.txt')
+writeTimeTable('parcels19h30_2019y11m5.txt', 'drones19h30_2019y11m5.txt')
+writeDronesUpdate('parcels19h30_2019y11m5.txt', 'drones19h30_2019y11m5.txt')
 
 
 
