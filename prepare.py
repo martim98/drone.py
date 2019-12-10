@@ -11,6 +11,7 @@ def sortingMaches(list1):
     """
     list1.sort(key= lambda list1: (list1[0], list1[1]))
     return list1
+    #just a simple function to sort the matches by time
 
 def reOrganizeDrones(list1):
     """
@@ -32,6 +33,7 @@ def reOrganizeDrones(list1):
             auxList.append(list1[b][i])
         listDronesOrganizedF.append(auxList)
     return listDronesOrganizedF
+    #a function to reorganize the drones and also to turn round the floats
 
 
 

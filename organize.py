@@ -62,34 +62,48 @@ def match(fileName1, fileName2):
     a = 0 #this should be 0
     counter = 0
     counter2 = 0
-    while bole1:
+    while bole1: # this is the loop for the parcels
         bole2 = True
         b = 0
         counter1 = counter
-        while bole2:
+        while bole2: # this is the loop for the drones
             listBool = []
             for i in range(1, 3):
-                listBool.append(listParcels[a][i] == listDrones[b][i])
+                listBool.append(listParcels[a][i] == listDrones[b][i]) # checking the zone and the date
             for i in range(4, 6):
-                listBool.append(listDrones[b][i] >= listParcels[a][i])
-            listBool.append(listDrones[b][6]*1000 > listParcels[a][4]) #distance
+                listBool.append(listDrones[b][i] >= listParcels[a][i]) # checking the max distance and the weight
+            listBool.append(listDrones[b][6]*1000 > listParcels[a][4]) # checking if has enough range
             listF.append(listBool)
 
             # checking the booleans and matching
             if False not in listBool:
+                # the first if checking the order time is bigger than the drone's
                 if timeD.giveDateTime(listDrones[b][2], listDrones[b][3]) <= timeD.giveDateTime(listParcels[a][2], listParcels[a][3]):
                     writeTB.append([listParcels[a][2].lstrip(), listParcels[a][3].lstrip(),
                                     listParcels[a][0].lstrip(), listDrones[b][0].lstrip()])
+
+                    #if it is it will update drones time
                     listDrones[b][3] = listParcels[a][3].lstrip()
+
+                    #then update the date on the timetable list
                     writeTB[counter2][0:2] = timeD.checkTime(writeTB[counter2][0:2], listParcels[a][6])
+
+                    listDrones[b][2:4] = writeTB[counter2][0:2]
+
+                    #finally updates drones
                     updateDrones(listDrones, listParcels, a, b)
 
-                else:
+                else: #if the time of the drone is bigger
                     writeTB.append([listParcels[a][2].lstrip(), listDrones[b][3].lstrip(),
                                     listParcels[a][0].lstrip(), listDrones[b][0].lstrip()])
+                    # it will just update drones
                     updateDrones(listDrones, listParcels, a, b)
+
+                #counters for iteration
                 counter += 1
                 counter2 += 1
+
+                #break the loop because the parcel was matched
                 bole2 = False
 
 
@@ -100,12 +114,15 @@ def match(fileName1, fileName2):
                 writeFinal.append([listParcels[a][2].lstrip(), listParcels[a][3].lstrip(),
                                    listParcels[a][0].lstrip(), 'cancelled'])
                 bole2 = False
+
+        #this conditions may not be necessary
         a += 1
         if a == len(listParcels):
             bole1 = False
         elif a == len(listParcels) and counter != counter1:
             a = 0
 
+    #the writeFinal list has the cancelled orders that will be on top of the matched orders
 
     return {'timetable': writeFinal + pr.sortingMaches(writeTB), 'drones': pr.reOrganizeDrones(listDrones)}
 
@@ -118,14 +135,14 @@ def updateDrones(listDrones, listParcels, a, b):
     parcels and drones
     Ensures: an updated list of lists of each drone if needed
     """
-    listDrones[b][6] = listDrones[b][6] - ((listParcels[a][4]*2)/1000)
-    listDrones[b][7] += (listParcels[a][4]*2)
-    listDrones[b][2:4] = timeD.addTimeAsString(listDrones[b][2:4], listParcels[a][6])
+    listDrones[b][6] = listDrones[b][6] - ((listParcels[a][4]/1000)*2) # update the range
+    listDrones[b][7] += (listParcels[a][4]/1000) * 2 # update the acumulated distance
+    listDrones[b][2:4] = timeD.addTimeAsString(listDrones[b][2:4], listParcels[a][6]) # update/add the time
 
-    #sorting drones
-    return listDrones.sort(key = lambda listDrones: (listDrones[3], listDrones[6]))
+    # return drones by sorting as specified in the project
+    return listDrones.sort(key = lambda listDrones: (listDrones[2], listDrones[3], -listDrones[6], listDrones[7], listDrones[0]))
 
-    ## see in the sheet what parameters do drones need
+
 
 
 

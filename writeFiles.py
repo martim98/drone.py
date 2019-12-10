@@ -2,6 +2,8 @@ import readFiles as rf
 import organize as org
 
 
+### This are possible writeFiles functions
+### They can write from a list of lists of the drones, timetable and the header
 
 def writeTimeTable(parcelsFile, dronesFile):
     """
@@ -38,7 +40,7 @@ def writeDronesUpdate(parcelsFile, dronesFile):
     Requires: the drone input file as specified
     Ensures: a output txt file with the drone list updated after matching with parcels
     """
-    file = open('droneWRITE.txt', 'w')
+    file = open('droneUpdateTest.txt', 'w')
     for item in rf.readHeader(parcelsFile):
         file.write(str(item) + '\n')
     file.write('Drones:' + '\n')
