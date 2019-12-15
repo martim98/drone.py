@@ -1,4 +1,3 @@
-
 import datetime
 
 
@@ -76,7 +75,6 @@ def checkTime(list1, delta):
         return list1
 
 
-
 def convertTime(list1):
     """
     Retrives the 20:00 hour of the day given
@@ -98,7 +96,7 @@ def returnNewDate(list1):
     """
     b = giveDateTime(list1[0], list1[1])
     delta = datetime.timedelta(days = 1)
-    b =  datetime.datetime(b.year, b.month, b.day, hour = 8, minute = 0) + delta
+    b = datetime.datetime(b.year, b.month, b.day, hour = 8, minute = 0) + delta
 
     return [b.strftime('%Y-%m-%d'), b.strftime('%H:%M')]
 
