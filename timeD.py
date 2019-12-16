@@ -76,7 +76,6 @@ def addTimeAsString(list1, delta):
     """
     dateValidate = giveDateTime(list1[0], list1[1])
     delta = datetime.timedelta(minutes = delta)
-    #deltaIf = datetime.timedelta(days = 1)
     date = dateValidate + delta
 
     return ([date.strftime('%Y-%m-%d'), date.strftime('%H:%M')], date)
@@ -90,8 +89,8 @@ def convertTime(list1):
     ex: input list ['2019-05-03', '12:30']
     output list ['2019-05-03', '20:00']
 
-    requires: a list with strings of date and time
-    ensures: a new list with strings of the same date but with '20:00' as time
+    Requires: a list with strings of date and time
+    Ensures: a new list with strings of the same date but with '20:00' as time
     """
     a = giveDateTime(list1[0], list1[1])
     return datetime.datetime(a.year, a.month, a.day, hour = 20, minute = 0)
@@ -100,7 +99,7 @@ def returnNewDate(list1):
     """
     Calculates the '08:00' of next day
 
-    requires: a list with two strings of date and hour
+    Requires: a list with two strings of date and hour
     returns: a list with strings of new date and hour
     """
 

@@ -3,12 +3,10 @@ import timeD
 import readFiles as rf
 import organize as org
 
-#CHECK FOR THE COMMA ON THE END OF THE LINE
-#CHECK writeDrones AFTER UPDATING!
-#- done for Timetable: SORTING ACCORDING OT THE PDF REQUIREMENTS
-
 def listToString(listOfLists):
-    """Function that converts list of lists of strings to a list of strings
+    """
+    Function that converts list of lists of strings to a list of strings
+
     Requires: list of lists of strings
     Ensures: list of strings
     """
@@ -23,11 +21,12 @@ def listToString(listOfLists):
 
 
 def writeTimetable(fileName1, fileName2):
-    """ Function that updates list of lists of drones
-    !
+    """
+    Function that updates list of lists of drones
+
     Requires: file of parcels as fileName1 and file of drones as fileName2
-    ...
-    Ensures: 
+    Ensures: a txt output timetable.txt with respective date and hour of
+    parcels matched with drones
     """
     rf.checkInternal(fileName1, fileName2)
     rf.checkTitles(fileName1, fileName2)

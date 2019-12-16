@@ -5,7 +5,7 @@ import timeD
 def sortTimetable(timetable):
     """
     Function that sorts the output timetable in an
-    expectd order and puts first the cancelled orders
+    expected order and puts first the cancelled orders
     Order: first place the cancelled orders in
     time-ascending order, then by name; then place matched
     orders by date, time, name
@@ -52,7 +52,6 @@ def match(fileName1, fileName2):
     for a in range(len(listP)):
         h = True
         b = 0
-        #for b in range(len(listD)):
         while h:
             #date:
             if (listP[a][2] == listD[b][6]) and listP[a][1] == listD[b][1] \
@@ -64,7 +63,6 @@ def match(fileName1, fileName2):
                 maksimum = max(listD[b][7], listP[a][3])
                 listD[b][7] = maksimum
                 time = [listD[b][6], maksimum]
-
 
                 if timeD.addTimeAsString(time, listP[a][6])[1] <= timeD.convertTime(time):
                     writeTB.append([listP[a][2], maksimum, listP[a][0], listD[b][0]])

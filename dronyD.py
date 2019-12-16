@@ -7,7 +7,6 @@ import sys
 import writeFiles as wf
 
 
-
 def allocate(fileNameDrones, fileNameParcels):
     """
     Assign given drones to given parcels.
