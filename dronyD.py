@@ -1,13 +1,12 @@
-# 2019-2020 Fundamentos de Programação
+# 2019-2020 Fundamentos de Programacao
 # Grupo N
-# número nome
-# número nome
+# numero nome
+# numero nome
 
 import sys
-import readFiles as rf
 import writeFiles as wf
 
-inputFileName1, inputFileName2 = sys.argv[1:]
+
 
 def allocate(fileNameDrones, fileNameParcels):
     """
@@ -20,25 +19,13 @@ def allocate(fileNameDrones, fileNameParcels):
     transportation of parcels and the updated listing of drones, following the format
     and naming convention indicated in the project sheet.
     """
-#    if False in rf.checkInternal(fileNameDrones, fileNameParcels)[0]:
-#        print('Input error: Name and header inconsistent in file(s) {}, {}!'.format(rf.checkInternal(fileNameDrones, fileNameParcels)[1][0], \
-#                                                                 rf.checkInternal(fileNameDrones, fileNameParcels)[1][1]))
-#    elif not rf.checkTitles(fileNameParcels, fileNameDrones):
-#        print('Input error: Inconsistent files {} and {}'.format(fileNameParcels, fileNameDrones))
-#    else:
-#        wf.writeDrones(fileNameParcels, fileNameDrones)
-#        wf.writeTimetable(fileNameParcels, fileNameDrones)
-    rf.checkInternal(fileNameDrones, fileNameParcels)
-    rf.checkTitles(fileNameParcels, fileNameDrones)
-    wf.writeDrones(fileNameParcels, fileNameDrones)
     wf.writeTimetable(fileNameParcels, fileNameDrones)
-        
+    wf.writeDrones(fileNameParcels, fileNameDrones)
 
-allocate(inputFileName1, inputFileName2)
+fileNameDrones, fileNameParcels = sys.argv[1:]
 
-#allocate('drones19h30_2019y11m5.txt', 'parcels19h30_2019y11m5.txt')
-#title_out = "timetable{0}h{1}_{2}y{3}m{4}.txt".format()
-#newListA = open(title_out)
+allocate('drones19h30_2019y11m5.txt', 'parcels19h30_2019y11m5.txt')
+
 
 
 

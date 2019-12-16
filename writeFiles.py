@@ -1,5 +1,5 @@
-import constants as ct
-import timeD as td
+import operations as op
+import timeD
 import readFiles as rf
 import organize as org
 
@@ -29,25 +29,21 @@ def writeTimetable(fileName1, fileName2):
     ...
     Ensures: 
     """
+    rf.checkInternal(fileName1, fileName2)
+    rf.checkTitles(fileName1, fileName2)
     listDrUp, matched = org.match(fileName1, fileName2)
-    #time = timeD.addTimeAsString(fileName1[2:4], fileName1[6])
-    timeH, timeM = ct.takeTime(fileName1[7:12])
-    dateY, dateM, dateD = ct.takeDate(fileName1[13:fileName1.find('.')])
+    timeH, timeM = timeD.takeTime(fileName1[7:12])
+    dateY, dateM, dateD = timeD.takeDate(fileName1[13:fileName1.find('.')])
     title = "timetable{:02d}h{:02d}_{}y{}m{}.txt".format(timeH, timeM, dateY, dateM, dateD)
     updatedFile = open(title, 'w')
-    headerP = rf.getHeader(fileName1)
+    headerP = rf.readHeader(fileName1)
     headerP[-1] = "Timeline: \n"
     content = headerP
     matchedStr = listToString(matched)
     content.extend(matchedStr)
-    #print(content)
     updatedFile.writelines(content)
     updatedFile.close()
     
-
-
-
-#writeTimetable('parcels11h00_2019y11m5.txt', 'drones11h00_2019y11m5.txt')
 
 
 def reOrganizeDrones(list1):
@@ -57,24 +53,17 @@ def reOrganizeDrones(list1):
     Requires: The drone list of lists already updated
     Ensures: A list of lists of the drones prepared for the writing function
     """
-    listDronesOrganizedF = []
+
     for b in range(len(list1)):
-        auxList = []
-        for i in range(0,2):
-            auxList.append(list1[b][i])
-        for i in range(-3, -5, -1):
-            auxList.append(int(list1[b][i]))
-        for i in range(-1, -3, -1):
-            auxList.append(round(list1[b][i], 1))
-        for i in range(2,4):
-            auxList.append(list1[b][i])
-        listDronesOrganizedF.append(auxList)
-    return listDronesOrganizedF
+        for i in range(4, 6):
+            list1[b][i] = round(list1[b][i], 1)
+    return list1
     #a function to reorganize the drones and also to turn round the floats
 
 
 def writeDrones(fileName1, fileName2):
-    """ Function that creates updated listing of drones for the following
+    """
+    Function that creates updated listing of drones for the following
     delivery schedule
     
     Requires: file of parcels as fileName1 and file of drones as fileName2, in fixed order
@@ -82,32 +71,21 @@ def writeDrones(fileName1, fileName2):
     accumulated distance
     """
     listDrUp, matched = org.match(fileName1, fileName2)
-    timeH1, timeM1 = ct.takeTime(fileName1[7:12])
+    timeH1, timeM1 = timeD.takeTime(fileName1[7:12])
     timeH1str = '{:02d}:{:02d}'.format(timeH1, timeM1)
-    dateY, dateM, dateD = ct.takeDate(fileName1[13:fileName1.find('.')])
+    dateY, dateM, dateD = timeD.takeDate(fileName1[13:fileName1.find('.')])
     timeDstr = '{}-{}-{}'.format(dateY, dateM, dateD)
-    DTformat = td.addTimeAsString([timeDstr, timeH1str], 30)[0] #changes the format
+    DTformat = timeD.addTimeAsString([timeDstr, timeH1str], 30)[0] #changes the format
     #to datatime AND add 30 mins AND output as a list of strings again
-    timeH2, timeM2 = ct.takeTime(str(DTformat[1]))
+    timeH2, timeM2 = timeD.takeTime(str(DTformat[1]))
     title = "drones{:02d}h{:02d}_{}y{}m{}.txt".format(timeH2, timeM2, dateY, dateM, dateD)
     updatedFile = open(title, 'w')
-    headerD = rf.getHeader(fileName2)
+    headerD = rf.readHeader(fileName2)
     headerD[1] = '{:02d}h{:02d}\n'.format(timeH2, timeM2) #changing the time in the header
     content = headerD
     listDrStr = listToString(reOrganizeDrones(listDrUp))
     content.extend(listDrStr)
-    #print(content)
     updatedFile.writelines(content)
     updatedFile.close()
-
-
-#writeDrones('parcels11h00_2019y11m5.txt', 'drones11h00_2019y11m5.txt')
-
-
-
-            
-
-#from organize import match
-#listDr, matched = match('parcels16h00_2019y11m5.txt', 'drones16h00_2019y11m5.txt')
 
 
