@@ -15,7 +15,6 @@ def readHeader(fileName):
     fileIn = open(fileName, 'r')
     lines = fileIn.readlines()
     fileIn.close()
-    
     return lines[:7]
 
 

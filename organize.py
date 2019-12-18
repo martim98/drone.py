@@ -14,7 +14,7 @@ def sortTimetable(timetable):
     Requires: a list of lists of matched orders
     Ensures: a sorted list of lists of matched orders
     """
-    timetable.sort(key = lambda x: (x[0], x[1], x[2]))
+    timetable.sort(key = lambda x: (x[ct.T_DATE], x[ct.T_HOUR], x[ct.T_PARCEL]))
     counter = 0
     for i in range(len(timetable)):
         if 'cancelled' in timetable[i][ct.T_STATUS]:
@@ -34,7 +34,7 @@ def updateDrones(listD, listP, a, b):
     """
     listD[b][ct.D_RANGE] -= ((listP[a][ct.P_DISTANCE]/1000)*2) # update the range
     listD[b][ct.D_ACUM_DISTANCE] += (listP[a][ct.P_DISTANCE]/1000) * 2 # update the acumulated distance
-    listD[b][6:8] = timeD.addTime(listD[b][6:8], listP[a][ct.P_TIME])[0] # update/add the time
+    listD[b][ct.D_DATE:] = timeD.addTime(listD[b][ct.D_DATE:], listP[a][ct.P_TIME])[0] # update/add the time
 
     # return drones by sorting as specified in the project
     return listD.sort(key = lambda x: (x[ct.D_DATE], x[ct.D_HOUR], -x[ct.D_RANGE],
@@ -75,7 +75,7 @@ def match(fileNameParcels, fileNameDrones):
 
                 else:
                     writeTB.append(timeD.returnNewDate(time) + [listP[a][ct.P_NAME], listD[b][ct.D_NAME]])
-                    listD[b][6:8] = timeD.returnNewDate(time)
+                    listD[b][ct.D_DATE:] = timeD.returnNewDate(time)
                 h = False
                 updateDrones(listD, listP, a, b)
 
@@ -86,7 +86,6 @@ def match(fileNameParcels, fileNameDrones):
             b +=1
 
     writeTBsorted = sortTimetable(writeTB)
-
     return listD, writeTBsorted
 
 
