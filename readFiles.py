@@ -56,32 +56,33 @@ def checkInternal(fileName1, fileName2):
         header = readHeader(fileName)
         try:
             if not (titleType == header[6].strip(':\n').lower() and titleTime == header[1].strip(':\n') and
-                    titleDateL == [int(x) for x in header[3].split('-')]): raise Exception
+                    titleDateL == [int(x) for x in header[3].split('-')]):
+                raise Exception
         except Exception:
-            raise Exception("Name and header inconsistent in {} file!".format(fileName))
+            raise Exception("Input Error: Name and header inconsistent in {} file!".format(fileName))
 
-def checkTitles(fileName1, fileName2):
+def checkTitles(fileNameParcels, fileNameDrones):
     """
     Checks if the titles of input files contain 'parcels' and 'drones' 
     and if the dates and hours are the same
 
     Requires: two file titles of a parcels file and a drone file
-    fileName1 must be the parcels file
-    fileName2 must be the drones file
+    fileNameParcels must be the parcels file
+    fileNameDrones must be the drones file
     Ensures: returns boolean: True if the conditions are met and 
     False if the are not
     """
-    strDateP = fileName1[fileName1.find('_')+1:fileName1.find('.')]
-    strDateD = fileName2[fileName2.find('_')+1:fileName2.find('.')]
-    strTimeP = fileName1[7:12] #ParcelsTime
-    strTimeD = fileName2[6:11] #DronesTime
+    strDateP = fileNameParcels[fileNameParcels.find('_')+1:fileNameParcels.find('.')]
+    strDateD = fileNameDrones[fileNameDrones.find('_')+1:fileNameDrones.find('.')]
+    strTimeP = fileNameParcels[7:12] #ParcelsTime
+    strTimeD = fileNameDrones[6:11] #DronesTime
     try:
         if strTimeP == strTimeD and strDateP == strDateD:
-            if fileName1[0:7] == 'parcels' and fileName2[0:6] == 'drones':
+            if fileNameParcels[0:7] == 'parcels' and fileNameDrones[0:6] == 'drones':
                 return True
         else:
             raise Exception
     except Exception:
-        raise Exception("Input error: Inconsistent files {} and {}!".format(fileName1, fileName2))
+        raise Exception("Input error: Inconsistent files {} and {}!".format(fileNameParcels, fileNameDrones))
 
 

@@ -1,6 +1,6 @@
 import timeD
 
-def convertStrDrones(listA):
+def convertStrDrones(listA): #
     """
     Function that converts invalid types of drone list of list into valid
 

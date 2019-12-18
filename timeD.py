@@ -67,7 +67,7 @@ def giveDateTime(str1, str2):
     
 
 
-def addTimeAsString(list1, delta):
+def addTime(list1, delta):
     """
     Add time to drones to update their information
 
@@ -100,9 +100,8 @@ def returnNewDate(list1):
     Calculates the '08:00' of next day
 
     Requires: a list with two strings of date and hour
-    returns: a list with strings of new date and hour
+    Returns: a list with strings of new date and hour
     """
-
     b = giveDateTime(list1[0], list1[1])
     delta = datetime.timedelta(days = 1)
     b = datetime.datetime(b.year, b.month, b.day, hour = 8, minute = 0) + delta

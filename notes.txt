@@ -1,3 +1,28 @@
-Corrected a sorting problem
+what to do else:
 
-remove commas
+-remove commas from output txt
+-See if we can replace exceptions for assert
+-30 minutes constants that adds at the fileName in writeFiles
+at the constants module
+-Check if there are more constants to add, like indexes
+-review contracts and add comments
+
+
+
+About the report
+
+this is what I would suggest to divide the work, it's not necessarily what each one of us did because some functions as
+we saw they were merged, so this could be a possibility:
+
+readFiles.py, writeFiles.py and timeD.py (the ones you made) (total = 12 functions) -> Kinga
+organize.py, operations.py, timeD.py (the ones I made) plus the allocate function (total = 10 functions) -> Martim
+
+
+It is just a brief description saying what they do, maybe it's not necessary to describe all of them, but probably the most
+important ones and the 'extras' I would say.
+
+When you can, tell me what you think about this so that we can start to finish :)
+
+
+
+
