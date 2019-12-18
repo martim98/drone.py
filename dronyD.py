@@ -23,7 +23,7 @@ def allocate(fileNameDrones, fileNameParcels):
 
 fileNameDrones, fileNameParcels = sys.argv[1:]
 
-allocate('drones19h30_2019y11m5.txt', 'parcels19h30_2019y11m5.txt')
+allocate(fileNameDrones, fileNameParcels)
 
 
 

@@ -36,7 +36,8 @@ def updateDrones(listDrones, listParcels, a, b):
     listDrones[b][6:8] = timeD.addTimeAsString(listDrones[b][6:8], listParcels[a][6])[0] # update/add the time
 
     # return drones by sorting as specified in the project
-    return listDrones.sort(key = lambda listDrones: (listDrones[6], listDrones[7], listDrones[5], -listDrones[4], listDrones[0]))
+    return listDrones.sort(key = lambda listDrones: (listDrones[6], listDrones[7], -listDrones[5], listDrones[4],
+                                                     listDrones[0]))
 
 def match(fileName1, fileName2):
     """
@@ -47,7 +48,7 @@ def match(fileName1, fileName2):
     """
     listD = op.convertStrDrones(rf.readListing(fileName2))
     listP = op.convertStrParcles(rf.readListing(fileName1))
-    listD.sort(key= lambda listD: (listD[6], listD[7], listD[5], -listD[4], listD[0]))
+    listD.sort(key= lambda listD: (listD[6], listD[7], -listD[5], listD[4], listD[0]))
     writeTB = []
     for a in range(len(listP)):
         h = True
