@@ -38,7 +38,5 @@ def convertStrParcles(listB):
                 listB[b][i] = float(listB[b][i].strip())
             else:
                 listB[b][i] = '{:02d}'.format(timeD.takeTime(listB[b][i])[0])+':{:02d}'.format(timeD.takeTime(listB[b][i])[1])
-    while [''] in listB:
-        listB.remove([''])
 
     return listB

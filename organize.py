@@ -61,7 +61,7 @@ def match(fileNameParcels, fileNameDrones):
             if (listP[a][2] == listD[b][ct.D_DATE])\
                     and listP[a][ct.P_ZONE] == listD[b][ct.D_ZONE] \
                     and listP[a][ct.P_DISTANCE] <= listD[b][ct.D_MAX_DISTANCE]\
-                    and listP[a][ct.P_DISTANCE] < listD[b][ct.D_MAX_DISTANCE] * 1000 \
+                    and listP[a][ct.P_DISTANCE] * 2 < listD[b][ct.D_RANGE] * 1000 \
                     and listP[a][ct.P_WEIGHT] <= listD[b][ct.D_WEIGHT]:
                 #hour: if listP[a][ct.P_HOUR] >= listD[ct.D_MAX_DISTANCE]:
                 #zone and distance and autonomy:

@@ -47,7 +47,8 @@ def writeTimetable(fileNameParcels, fileNameDrones):
 
 def reOrganizeDrones(list1):
     """
-    Function that reverses the organizeDrones function
+    Function that prepares drones list of lists to the output
+    txt file
 
     Requires: The drone list of lists already updated
     Ensures: A list of lists of the drones prepared for the writing function
