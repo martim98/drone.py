@@ -28,20 +28,20 @@ T_STATUS = 3
 
 # header lines index, h = header
 
-h_Time = 1
-h_Day = 3
-h_Company = 5
-h_Scope = 6
+H_TIME = 1
+H_DAY = 3
+H_COMPANY = 5
+H_SCOPE = 6
 
 # string constants
 
-P_title = 'parcels'
-D_title = 'drones'
-T_scope = 'Timeline: \n'
+P_TITLE = 'parcels'
+D_TITLE = 'drones'
+T_SCOPE = 'Timeline: \n'
 
 # time constant in minutes
 
-Time_delta = 30
+TIME_DELTA = 30
 
 
 

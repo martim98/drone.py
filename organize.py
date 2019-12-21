@@ -32,9 +32,10 @@ def updateDrones(listD, listP, a, b):
     and the b index of the drones
     Ensures: an updated list of lists of each drone if needed
     """
-    listD[b][ct.D_RANGE] -= ((listP[a][ct.P_DISTANCE]/1000)*2) # update the range
-    listD[b][ct.D_ACUM_DISTANCE] += (listP[a][ct.P_DISTANCE]/1000)*2 # update the acumulated distance
-    listD[b][ct.D_DATE:] = timeD.addTime(listD[b][ct.D_DATE:], listP[a][ct.P_TIME])[0] # update/add the time
+    #Updating Drones as specified in the project
+    listD[b][ct.D_RANGE] -= ((listP[a][ct.P_DISTANCE]/1000)*2)
+    listD[b][ct.D_ACUM_DISTANCE] += (listP[a][ct.P_DISTANCE]/1000) * 2
+    listD[b][ct.D_DATE:] = timeD.addTime(listD[b][ct.D_DATE:], listP[a][ct.P_TIME])[0]
 
     # return drones by sorting as specified in the project
     return listD.sort(key = lambda x: (x[ct.D_DATE], x[ct.D_HOUR], -x[ct.D_RANGE],
@@ -57,28 +58,29 @@ def match(fileNameParcels, fileNameDrones):
         h = True
         b = 0
         while h:
-            #date:
+            # Comparing information from Drones and Parcels, if every condition is met, proceed in code, if not, break
+            # loop and iterate over the next drone
             if (listP[a][ct.P_DATE] == listD[b][ct.D_DATE])\
                     and listP[a][ct.P_ZONE] == listD[b][ct.D_ZONE] \
                     and listP[a][ct.P_DISTANCE] <= listD[b][ct.D_MAX_DISTANCE]\
-                    and listP[a][ct.P_DISTANCE] < listD[b][ct.D_MAX_DISTANCE]*1000 \
+                    and listP[a][ct.P_DISTANCE] * 2 < listD[b][ct.D_RANGE]*1000 \
                     and listP[a][ct.P_WEIGHT] <= listD[b][ct.D_WEIGHT]:
-                #hour: if listP[a][ct.P_HOUR] >= listD[ct.D_MAX_DISTANCE]:
-                #zone and distance and autonomy, weight
+                # The order time must be the time biggest time between drone and parcel
                 maksimum = max(listD[b][ct.D_HOUR], listP[a][ct.P_HOUR])
                 listD[b][ct.D_HOUR] = maksimum
                 time = [listD[b][ct.D_DATE], maksimum]
 
+                # Condition to check if the order ends after 20h00
                 if timeD.addTime(time, listP[a][ct.P_TIME])[1] <= timeD.convertTime(time):
                     writeTB.append([listP[a][ct.P_DATE], maksimum, listP[a][ct.P_NAME], listD[b][ct.D_NAME]])
-
                 else:
                     writeTB.append(timeD.returnNewDate(time) + [listP[a][ct.P_NAME], listD[b][ct.D_NAME]])
                     listD[b][ct.D_DATE:] = timeD.returnNewDate(time)
+
                 h = False
                 updateDrones(listD, listP, a, b)
-
             else:
+                # Else: if every drone was checked and no match was found, then cancel the order
                 if b == len(listD)-1:
                     writeTB.append([listP[a][ct.P_DATE], listP[a][ct.P_HOUR], listP[a][ct.P_NAME], "cancelled"])
                     h = False

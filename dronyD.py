@@ -1,7 +1,7 @@
 # 2019-2020 Fundamentos de Programacao
-# Grupo N
-# numero nome
-# numero nome
+# Grupo 30
+# number name
+# 55066 Martim Almeida
 
 import sys
 import writeFiles as wf
@@ -18,13 +18,15 @@ def allocate(fileNameDrones, fileNameParcels):
     transportation of parcels and the updated listing of drones, following the format
     and naming convention indicated in the project sheet.
     """
+    # When running the writeTimetable function, the program will call the readFiles functions
+    # that assert the prerequisites
     wf.writeTimetable(fileNameParcels, fileNameDrones)
     wf.writeDrones(fileNameParcels, fileNameDrones)
 
 fileNameDrones, fileNameParcels = sys.argv[1:]
 
 allocate(fileNameDrones, fileNameParcels)
-#allocate('drones11h00_2019y11m5.txt', 'parcels11h00_2019y11m5.txt')
+
 
 
 

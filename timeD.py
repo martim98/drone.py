@@ -1,19 +1,6 @@
 import datetime
 
 
-#def convertTime(string):
-#    """
-#    Function that converts a time into a 4 digit int
-#
-#    Requires: a time format in string ex: '12:30'
-#    Ensures: a 4 digit int, ex: 1230
-#    """
-#    string = string.replace(' ', '')
-#    new = string[0:2] + string[3:]
-#
-#    return int(new)
-
-
 def takeTime(time):
     """
     Function that reads time from the line and splits it into
@@ -58,31 +45,28 @@ def giveDateTime(str1, str2):
     a datetime module format
 
     Requires: two string in the following format and order:
-        'year-month-day' 'hour:minutes'
+        'yyyy-mm-dd' 'hh:mm'
     Ensures: a datetime format of the input information
     """
     strf = str1.lstrip() + ' ' + str2.lstrip()
     date = datetime.datetime.strptime(strf, '%Y-%m-%d %H:%M')
     return date
-    #returns a datetime format than can support time operations
-    
+
 
 
 def addTime(list1, delta):
     """
     Add time to drones to update their information
 
-    Requires: the lists of lists of drones and a delta given by parcels information: int >= 0
-    Ensures: The list of lists of the drones with time information updated
+    Requires: a list with two strings of date and hour in format 'yyyy-mm-dd' 'hh:mm'
+    and a delta given by parcels information: int >= 0
+    Ensures: A tuple of lists of the drones with time information updated
     """
     dateValidate = giveDateTime(list1[0], list1[1])
     delta = datetime.timedelta(minutes = delta)
     date = dateValidate + delta
 
     return ([date.strftime('%Y-%m-%d'), date.strftime('%H:%M')], date)
-    #this return a list with strings of date and time updated
-    #ex: ['2019-06-01', '10:30']
-
 
 def convertTime(list1):
     """
@@ -96,12 +80,15 @@ def convertTime(list1):
     a = giveDateTime(list1[0], list1[1])
     return datetime.datetime(a.year, a.month, a.day, hour = 20, minute = 0)
 
+
 def returnNewDate(list1):
     """
-    Calculates the '08:00' of next day
+    Calculates the '08:00' hour of next day
+    ex: input list ['2019-05-03', '12:30']
+    output list ['2019-05-04', '08:00']
 
-    Requires: a list with two strings of date and hour
-    Returns: a list with strings of new date and hour
+
+    Returns: a list with strings of new date and hour in same format
     """
     b = giveDateTime(list1[0], list1[1])
     delta = datetime.timedelta(days = 1)

@@ -1,4 +1,3 @@
-import operations as op
 import timeD
 import readFiles as rf
 import organize as org
@@ -45,7 +44,7 @@ def writeTimetable(fileNameParcels, fileNameDrones):
     headerP = rf.readHeader(fileNameParcels)
     
     #changing header's scope
-    headerP[ct.h_Scope] = ct.T_scope
+    headerP[ct.H_SCOPE] = ct.T_SCOPE
     content = headerP
     matchedStr = listToString(matched)
     content.extend(matchedStr)
@@ -88,7 +87,7 @@ def writeDrones(fileNameParcels, fileNameDrones):
     timeDrStr = '{}-{}-{}'.format(dateY, dateM, dateD)
     
     #changes the format to datatime AND add 30 mins AND output as a list of strings again
-    DTformat = timeD.addTime([timeDrStr, timeH1str], ct.Time_delta)[0] 
+    DTformat = timeD.addTime([timeDrStr, timeH1str], ct.TIME_DELTA)[0]
     timeH2, timeM2 = timeD.takeTime(str(DTformat[1]))
     
     #creating a new file
@@ -97,7 +96,7 @@ def writeDrones(fileNameParcels, fileNameDrones):
     headerD = rf.readHeader(fileNameDrones)
     
     #changing the time in the header
-    headerD[ct.h_Time] = '{:02d}h{:02d}\n'.format(timeH2, timeM2)
+    headerD[ct.H_TIME] = '{:02d}h{:02d}\n'.format(timeH2, timeM2)
     
     content = headerD
     listDrStr = listToString(reOrganizeDrones(listDrUp))
