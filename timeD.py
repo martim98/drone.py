@@ -60,7 +60,9 @@ def addTime(list1, delta):
 
     Requires: a list with two strings of date and hour in format 'yyyy-mm-dd' 'hh:mm'
     and a delta given by parcels information: int >= 0
-    Ensures: A tuple of lists of the drones with time information updated
+    Ensures: A tuple with the times updated in two differente formats:
+    one in a list in the same format as the input
+    the second in datetime format
     """
     dateValidate = giveDateTime(list1[0], list1[1])
     delta = datetime.timedelta(minutes = delta)

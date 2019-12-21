@@ -35,7 +35,7 @@ def updateDrones(listD, listP, a, b):
     #Updating Drones as specified in the project
     listD[b][ct.D_RANGE] -= ((listP[a][ct.P_DISTANCE]/1000)*2)
     listD[b][ct.D_ACUM_DISTANCE] += (listP[a][ct.P_DISTANCE]/1000) * 2
-    listD[b][ct.D_DATE:] = timeD.addTime(listD[b][ct.D_DATE:], listP[a][ct.P_TIME])[0]
+    listD[b][ct.D_DATE:] = timeD.addTime(listD[b][ct.D_DATE:], listP[a][ct.P_TIME])[ct.AS_STRING]
 
     # return drones by sorting as specified in the project
     return listD.sort(key = lambda x: (x[ct.D_DATE], x[ct.D_HOUR], -x[ct.D_RANGE],
@@ -63,7 +63,7 @@ def match(fileNameParcels, fileNameDrones):
             if (listP[a][ct.P_DATE] == listD[b][ct.D_DATE])\
                     and listP[a][ct.P_ZONE] == listD[b][ct.D_ZONE] \
                     and listP[a][ct.P_DISTANCE] <= listD[b][ct.D_MAX_DISTANCE]\
-                    and listP[a][ct.P_DISTANCE] * 2 < listD[b][ct.D_RANGE]*1000 \
+                    and listP[a][ct.P_DISTANCE] * 2 - listD[b][ct.D_RANGE] * 1000 <= ct.DELTA_FLOATS \
                     and listP[a][ct.P_WEIGHT] <= listD[b][ct.D_WEIGHT]:
                 # The order time must be the time biggest time between drone and parcel
                 maksimum = max(listD[b][ct.D_HOUR], listP[a][ct.P_HOUR])
@@ -71,7 +71,7 @@ def match(fileNameParcels, fileNameDrones):
                 time = [listD[b][ct.D_DATE], maksimum]
 
                 # Condition to check if the order ends after 20h00
-                if timeD.addTime(time, listP[a][ct.P_TIME])[1] <= timeD.convertTime(time):
+                if timeD.addTime(time, listP[a][ct.P_TIME])[ct.AS_DATETIME] <= timeD.convertTime(time):
                     writeTB.append([listP[a][ct.P_DATE], maksimum, listP[a][ct.P_NAME], listD[b][ct.D_NAME]])
                 else:
                     writeTB.append(timeD.returnNewDate(time) + [listP[a][ct.P_NAME], listD[b][ct.D_NAME]])

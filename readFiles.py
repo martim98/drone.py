@@ -1,10 +1,11 @@
 # 2019-2020 Fundamentos de Programacao
 # Grupo N
-# numero nome
-# numero nome
+# number name
+# 55066 Martim Almeida
 
 import timeD
 import constants as ct
+
 
 def readHeader(fileName):
     """

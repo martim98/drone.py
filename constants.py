@@ -19,7 +19,7 @@ P_DISTANCE = 4
 P_WEIGHT = 5
 P_TIME = 6
 
-# Timetable index, T = timetable
+# timetable index, T = timetable
 
 T_DATE = 0
 T_HOUR = 1
@@ -43,7 +43,14 @@ T_SCOPE = 'Timeline: \n'
 
 TIME_DELTA = 30
 
+# index of output of addTime function
 
+AS_STRING = 0
+AS_DATETIME = 1
+
+# delta for comparing float
+
+DELTA_FLOATS = 0.0001
 
 
 

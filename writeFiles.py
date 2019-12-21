@@ -54,7 +54,7 @@ def writeTimetable(fileNameParcels, fileNameDrones):
 
 def reOrganizeDrones(list1):
     """
-    Function that reverses the organizeDrones function
+    Function that prepares drones list of lists for the output .txt
 
     Requires: The drone list of lists already updated
     Ensures: A list of lists of the drones prepared for the writing function
@@ -64,7 +64,7 @@ def reOrganizeDrones(list1):
         for i in range(4, 6):
             list1[b][i] = round(list1[b][i], 1)
     return list1
-    #a function to reorganize the drones and also to turn round the floats
+
 
 
 def writeDrones(fileNameParcels, fileNameDrones):
@@ -87,7 +87,7 @@ def writeDrones(fileNameParcels, fileNameDrones):
     timeDrStr = '{}-{}-{}'.format(dateY, dateM, dateD)
     
     #changes the format to datatime AND add 30 mins AND output as a list of strings again
-    DTformat = timeD.addTime([timeDrStr, timeH1str], ct.TIME_DELTA)[0]
+    DTformat = timeD.addTime([timeDrStr, timeH1str], ct.TIME_DELTA)[ct.AS_STRING]
     timeH2, timeM2 = timeD.takeTime(str(DTformat[1]))
     
     #creating a new file
