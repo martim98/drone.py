@@ -54,7 +54,7 @@ def giveDateTime(str1, str2):
 
 
 
-def addTime(list1, delta):
+def addTime(listTime, delta):
     """
     Add time to drones to update their information
 
@@ -64,13 +64,13 @@ def addTime(list1, delta):
     one in a list in the same format as the input
     the second in datetime format
     """
-    dateValidate = giveDateTime(list1[0], list1[1])
+    dateValidate = giveDateTime(listTime[0], listTime[1])
     delta = datetime.timedelta(minutes = delta)
     date = dateValidate + delta
 
     return ([date.strftime('%Y-%m-%d'), date.strftime('%H:%M')], date)
 
-def convertTime(list1):
+def convertTime(listTime):
     """
     Retrives the 20:00 hour of the day given
     ex: input list ['2019-05-03', '12:30']
@@ -79,11 +79,11 @@ def convertTime(list1):
     Requires: a list with strings of date and time
     Ensures: a new list with strings of the same date but with '20:00' as time
     """
-    a = giveDateTime(list1[0], list1[1])
+    a = giveDateTime(listTime[0], listTime[1])
     return datetime.datetime(a.year, a.month, a.day, hour = 20, minute = 0)
 
 
-def returnNewDate(list1):
+def returnNewDate(listTime):
     """
     Calculates the '08:00' hour of next day
     ex: input list ['2019-05-03', '12:30']
@@ -92,7 +92,7 @@ def returnNewDate(list1):
 
     Returns: a list with strings of new date and hour in same format
     """
-    b = giveDateTime(list1[0], list1[1])
+    b = giveDateTime(listTime[0], listTime[1])
     delta = datetime.timedelta(days = 1)
     b = datetime.datetime(b.year, b.month, b.day, hour = 8, minute = 0) + delta
 
