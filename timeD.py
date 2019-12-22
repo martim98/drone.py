@@ -52,7 +52,6 @@ def giveDateTime(str1, str2):
     return date
 
 
-
 def addTime(listTime, delta):
     """
     Add time to drones to update their information
@@ -68,6 +67,7 @@ def addTime(listTime, delta):
     date = dateValidate + delta
 
     return ([date.strftime('%Y-%m-%d'), date.strftime('%H:%M')], date)
+
 
 def convertTime(listTime):
     """

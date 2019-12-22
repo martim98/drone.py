@@ -59,7 +59,6 @@ def checkInternal(fileName):
             titleTime == header[ct.H_TIME].strip(':\n') and
             titleDateL == [int(x) for x in header[ct.H_DAY].split('-')]), \
             "Input Error: Name and header inconsistent in {} file!".format(fileName)
-        
 
 
 def checkTitles(fileNameParcels, fileNameDrones):

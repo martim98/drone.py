@@ -25,6 +25,7 @@ def sortTimetable(timetable):
 
     return csort
 
+
 def updateDrones(listD, listP, a, b):
     """
     Function that updates list of lists of drones
