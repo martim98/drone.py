@@ -1,4 +1,4 @@
-# 2019-2020 Fundamentos de Programacao
+# 2019-2020 Fundamentos de Programação
 # Grupo 30
 # 54070 Kinga Bondyra
 # 55066 Martim Almeida
